@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { REPARATIE_VESTIGINGEN } from "@/lib/locations";
-
 const NAV_ITEMS = [
   { href: "/", label: "Home" },
   { href: "/reparatieprijzen", label: "Reparaties" },
@@ -17,19 +15,8 @@ export function Header({ siteNaam }: { siteNaam: string }) {
   return (
     <header className="sticky top-0 z-40 bg-white">
       <div className="bg-tc-paars text-white text-xs sm:text-sm">
-        <div className="mx-auto max-w-6xl px-4 py-2 flex flex-wrap justify-center gap-x-1 text-center">
-          <span>In</span>
-          {REPARATIE_VESTIGINGEN.map((v, i) => (
-            <span key={v.plaats}>
-              {" "}
-              <span className="font-semibold">{v.plaats}</span>
-              {i < REPARATIE_VESTIGINGEN.length - 1
-                ? i === REPARATIE_VESTIGINGEN.length - 2
-                  ? " en"
-                  : ","
-                : ""}
-            </span>
-          ))}
+        <div className="mx-auto max-w-6xl px-4 py-2 flex justify-center text-center">
+          <span className="font-semibold">Vaak dezelfde dag gerepareerd</span>
         </div>
       </div>
       <div className="border-b border-neutral-200">
