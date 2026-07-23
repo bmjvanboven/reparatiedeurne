@@ -11,7 +11,13 @@ export type SiteVariant = {
 };
 
 const VARIANTEN: SiteVariant[] = [
-  { domein: "reparatiegemert.nl", siteNaam: "reparatiegemert", stad: "Gemert", directeReparaties: true },
+  {
+    domein: "reparatiegemert.nl",
+    siteNaam: "reparatiegemert",
+    stad: "Gemert",
+    directeReparaties: true,
+    googleSiteVerificatie: "-zdMaIUQRKT-P5jnx_kW-N5mClG7ObEuh6nEfhOv7Zg",
+  },
   {
     domein: "reparatiegeldrop.nl",
     siteNaam: "reparatiegeldrop",
