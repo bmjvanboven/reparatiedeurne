@@ -5,6 +5,7 @@ import { SearchBar } from "@/components/SearchBar";
 import { FeaturedDevices } from "@/components/FeaturedDevices";
 import { HomeBackground } from "@/components/HomeBackground";
 import { WaaromBlok } from "@/components/WaaromBlok";
+import { ReviewsBlok } from "@/components/ReviewsBlok";
 import {
   huidigeSiteVariant,
   naarLijst,
@@ -114,6 +115,7 @@ export default async function HomePage() {
         </section>
 
         <WaaromBlok variant={variant} />
+        <ReviewsBlok />
       </div>
     </>
   );
