@@ -38,9 +38,7 @@ export function naarLijst(items: string[]): string {
   return `${items.slice(0, -1).join(", ")} & ${items[items.length - 1]}`;
 }
 
-/** Zet de eigen stad vooraan in de lijst reparatiesteden, tenzij deze variant zelf niet repareert. */
+/** Zet de eigen stad vooraan in de lijst reparatiesteden (voor de paginatitel). */
 export function reparatieStedenVolgorde(variant: SiteVariant, reparatieSteden: string[]): string[] {
-  return variant.directeReparaties
-    ? [variant.stad, ...reparatieSteden.filter(p => p !== variant.stad)]
-    : reparatieSteden;
+  return [variant.stad, ...reparatieSteden.filter(p => p !== variant.stad)];
 }
