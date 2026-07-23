@@ -1,20 +1,23 @@
 import type { Metadata } from "next";
 import { haalReparatieData } from "@/lib/toolbox";
 import { ReparatieprijzenApp } from "@/components/ReparatieprijzenApp";
+import { huidigeSiteVariant } from "@/lib/site-varianten";
 
-export const metadata: Metadata = {
-  title: "Reparatieprijzen",
-  description:
-    "Bekijk direct de actuele reparatieprijzen voor Apple, Samsung en overige smartphones en tablets bij Telecombinatie.",
-  keywords: [
-    "reparatieprijzen",
-    "iPhone reparatie prijzen",
-    "Samsung reparatie prijzen",
-    "scherm vervangen prijs",
-    "accu vervangen prijs",
-    "tablet reparatie prijzen",
-  ],
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const variant = await huidigeSiteVariant();
+  return {
+    title: "Reparatieprijzen",
+    description: `Bekijk direct de actuele reparatieprijzen voor Apple, Samsung en overige smartphones en tablets bij Telecombinatie in ${variant.stad} en omgeving.`,
+    keywords: [
+      "reparatieprijzen",
+      "iPhone reparatie prijzen",
+      "Samsung reparatie prijzen",
+      "scherm vervangen prijs",
+      "accu vervangen prijs",
+      "tablet reparatie prijzen",
+    ],
+  };
+}
 
 export default async function ReparatieprijzenPage({
   searchParams,

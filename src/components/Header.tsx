@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   { href: "/contact", label: "Contact" },
 ];
 
-export function Header() {
+export function Header({ siteNaam }: { siteNaam: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -38,7 +38,7 @@ export function Header() {
               R
             </span>
             <span className="font-bold text-tc-paars leading-tight text-lg">
-              reparatiedeurne
+              {siteNaam}
             </span>
           </Link>
 

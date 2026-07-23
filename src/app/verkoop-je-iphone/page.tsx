@@ -1,19 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { VESTIGINGEN } from "@/lib/locations";
+import { sorteerVestigingenVoor } from "@/lib/locations";
+import { huidigeSiteVariant } from "@/lib/site-varianten";
 
-export const metadata: Metadata = {
-  title: "Verkoop je iPhone",
-  description:
-    "Verkoop je oude iPhone bij Telecombinatie in Deurne, Gemert, Veghel of Geldrop. Kom langs voor een eerlijke inschatting.",
-  keywords: [
-    "iPhone verkopen",
-    "iPhone inruilen",
-    "oude iPhone verkopen",
-    "telefoon verkopen Deurne",
-    "telefoon inkoop",
-  ],
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const variant = await huidigeSiteVariant();
+  return {
+    title: "Verkoop je iPhone",
+    description: `Verkoop je oude iPhone bij Telecombinatie in ${variant.stad} en omgeving. Kom langs voor een eerlijke inschatting.`,
+    keywords: [
+      "iPhone verkopen",
+      "iPhone inruilen",
+      "oude iPhone verkopen",
+      `telefoon verkopen ${variant.stad}`,
+      "telefoon inkoop",
+    ],
+  };
+}
 
 const STAPPEN = [
   {
@@ -38,7 +41,10 @@ const VOORWAARDEN = [
   "Je bent de rechtmatige eigenaar van het toestel",
 ];
 
-export default function VerkoopJeIphonePage() {
+export default async function VerkoopJeIphonePage() {
+  const variant = await huidigeSiteVariant();
+  const vestigingen = sorteerVestigingenVoor(variant.stad);
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <h1 className="mb-3 text-2xl font-bold text-neutral-900 sm:text-3xl">
@@ -74,7 +80,7 @@ export default function VerkoopJeIphonePage() {
       <div className="mt-12">
         <h2 className="mb-4 font-bold text-neutral-900">Kom langs of bel even</h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {VESTIGINGEN.map(v => (
+          {vestigingen.map(v => (
             <div key={v.plaats} className="rounded-xl border border-neutral-200 p-5">
               <h3 className="mb-2 font-bold text-tc-paars leading-tight">
                 Telecombinatie

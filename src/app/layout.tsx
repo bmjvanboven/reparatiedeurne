@@ -3,6 +3,7 @@ import { Montserrat } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { VESTIGINGEN } from "@/lib/locations";
+import { huidigeSiteVariant, naarLijst } from "@/lib/site-varianten";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -11,37 +12,43 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://reparatiedeurne.nl"),
-  title: {
-    default: "Reparatie Deurne, Gemert, Veghel & Geldrop | Telecombinatie",
-    template: "%s | Telecombinatie",
-  },
-  description:
-    "Telecombinatie repareert smartphones en tablets van Apple, Samsung en overige merken in Deurne, Gemert, Veghel en Geldrop. Bekijk direct de reparatieprijzen.",
-  keywords: [
-    "telefoon reparatie",
-    "smartphone reparatie",
-    "tablet reparatie",
-    "iPhone reparatie",
-    "Samsung reparatie",
-    "reparatie Deurne",
-    "reparatie Gemert",
-    "reparatie Veghel",
-    "reparatie Geldrop",
-    "Telecombinatie",
-  ],
-  icons: {
-    icon: "/reparatie-favicon.png",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const variant = await huidigeSiteVariant();
+  const stedenVolgorde = [variant.stad, ...VESTIGINGEN.map(v => v.plaats).filter(p => p !== variant.stad)];
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return {
+    metadataBase: new URL(`https://${variant.domein}`),
+    title: {
+      default: `Reparatie ${naarLijst(stedenVolgorde)} | Telecombinatie`,
+      template: "%s | Telecombinatie",
+    },
+    description: `Telecombinatie repareert smartphones en tablets van Apple, Samsung en overige merken in ${variant.stad} en omgeving. Bekijk direct de reparatieprijzen.`,
+    keywords: [
+      "telefoon reparatie",
+      "smartphone reparatie",
+      "tablet reparatie",
+      "iPhone reparatie",
+      "Samsung reparatie",
+      `reparatie ${variant.stad}`,
+      "reparatie Deurne",
+      "reparatie Gemert",
+      "reparatie Veghel",
+      "reparatie Geldrop",
+      "Telecombinatie",
+    ],
+    icons: {
+      icon: "/reparatie-favicon.png",
+    },
+  };
+}
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const variant = await huidigeSiteVariant();
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Telecombinatie",
-    url: "https://reparatiedeurne.nl",
+    url: `https://${variant.domein}`,
     department: VESTIGINGEN.map(v => ({
       "@type": "ElectronicsStore",
       name: v.naam,
@@ -64,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        <Header />
+        <Header siteNaam={variant.siteNaam} />
         <main className="flex-1">{children}</main>
         <Footer />
       </body>

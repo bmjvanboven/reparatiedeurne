@@ -4,21 +4,24 @@ import { haalReparatieData, platteToestellenlijst } from "@/lib/toolbox";
 import { SearchBar } from "@/components/SearchBar";
 import { FeaturedDevices } from "@/components/FeaturedDevices";
 import { HomeBackground } from "@/components/HomeBackground";
+import { huidigeSiteVariant } from "@/lib/site-varianten";
 
-export const metadata: Metadata = {
-  description:
-    "Reparatie van smartphones en tablets bij Telecombinatie in Deurne, Gemert, Veghel en Geldrop. Zoek je toestel en bekijk direct de reparatieprijzen.",
-  keywords: [
-    "reparatiewinkel Deurne",
-    "telefoon reparatie Deurne",
-    "smartphone reparatie Gemert",
-    "tablet reparatie Veghel",
-    "iPhone reparatie Geldrop",
-    "Samsung reparatie",
-    "scherm reparatie",
-    "accu vervangen",
-  ],
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const variant = await huidigeSiteVariant();
+  return {
+    description: `Reparatie van smartphones en tablets bij Telecombinatie in ${variant.stad} en omgeving. Zoek je toestel en bekijk direct de reparatieprijzen.`,
+    keywords: [
+      `reparatiewinkel ${variant.stad}`,
+      `telefoon reparatie ${variant.stad}`,
+      "smartphone reparatie Gemert",
+      "tablet reparatie Veghel",
+      "iPhone reparatie Geldrop",
+      "Samsung reparatie",
+      "scherm reparatie",
+      "accu vervangen",
+    ],
+  };
+}
 
 const UITGELICHT = [
   { merkKey: "apple", modelKey: "ip16pm" },

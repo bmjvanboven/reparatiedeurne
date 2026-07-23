@@ -1,8 +1,10 @@
 import type { MetadataRoute } from "next";
+import { huidigeSiteVariant } from "@/lib/site-varianten";
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const variant = await huidigeSiteVariant();
   return {
     rules: { userAgent: "*", allow: "/" },
-    sitemap: "https://reparatiedeurne.nl/sitemap.xml",
+    sitemap: `https://${variant.domein}/sitemap.xml`,
   };
 }

@@ -1,21 +1,28 @@
 import type { Metadata } from "next";
-import { VESTIGINGEN } from "@/lib/locations";
+import { sorteerVestigingenVoor } from "@/lib/locations";
+import { huidigeSiteVariant } from "@/lib/site-varianten";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Neem contact op met Telecombinatie in Deurne, Gemert, Veghel of Geldrop, of loop gewoon binnen.",
-  keywords: [
-    "contact Telecombinatie",
-    "reparatiewinkel Deurne",
-    "reparatiewinkel Gemert",
-    "reparatiewinkel Veghel",
-    "reparatiewinkel Geldrop",
-    "openingstijden telefoonwinkel",
-  ],
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const variant = await huidigeSiteVariant();
+  return {
+    title: "Contact",
+    description: `Neem contact op met Telecombinatie in ${variant.stad} en omgeving, of loop gewoon binnen.`,
+    keywords: [
+      "contact Telecombinatie",
+      `reparatiewinkel ${variant.stad}`,
+      "reparatiewinkel Deurne",
+      "reparatiewinkel Gemert",
+      "reparatiewinkel Veghel",
+      "reparatiewinkel Geldrop",
+      "openingstijden telefoonwinkel",
+    ],
+  };
+}
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const variant = await huidigeSiteVariant();
+  const vestigingen = sorteerVestigingenVoor(variant.stad);
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <h1 className="mb-3 text-2xl font-bold text-neutral-900 sm:text-3xl">Contact</h1>
@@ -25,7 +32,7 @@ export default function ContactPage() {
       </p>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {VESTIGINGEN.map(v => (
+        {vestigingen.map(v => (
           <div key={v.plaats} className="rounded-xl border border-neutral-200 p-5">
             <h2 className="mb-2 text-lg font-bold text-tc-paars leading-tight">
               Telecombinatie

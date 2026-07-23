@@ -46,3 +46,10 @@ export const VESTIGINGEN: Vestiging[] = [
     mapsUrl: "https://g.page/telecombinatie-geldrop?share",
   },
 ];
+
+/** Zet de vestiging van `plaats` vooraan, voor lokale relevantie op stad-specifieke domeinen. */
+export function sorteerVestigingenVoor(plaats: string): Vestiging[] {
+  const index = VESTIGINGEN.findIndex(v => v.plaats === plaats);
+  if (index <= 0) return VESTIGINGEN;
+  return [VESTIGINGEN[index], ...VESTIGINGEN.slice(0, index), ...VESTIGINGEN.slice(index + 1)];
+}

@@ -1,7 +1,9 @@
 import type { MetadataRoute } from "next";
+import { huidigeSiteVariant } from "@/lib/site-varianten";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://reparatiedeurne.nl";
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const variant = await huidigeSiteVariant();
+  const base = `https://${variant.domein}`;
   return [
     { url: base, changeFrequency: "weekly", priority: 1 },
     { url: `${base}/reparatieprijzen`, changeFrequency: "daily", priority: 0.9 },
