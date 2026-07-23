@@ -1,19 +1,17 @@
-import { naarLijst } from "@/lib/site-varianten";
 import type { SiteVariant } from "@/lib/site-varianten";
-import { VESTIGINGEN } from "@/lib/locations";
 
 /** Eigen tekst per stad, zodat elk domein unieke content heeft i.p.v. enkel een verwisselde stadsnaam. */
 const WAAROM_TEKST: Record<string, string> = {
   Deurne:
-    "Bij Telecombinatie Deurne repareren we dagelijks tientallen smartphones en tablets — van een gebarsten scherm tot een lege batterij. Loop binnen op Wolfsberg 1 of maak van tevoren een afspraak.",
+    "Bij Telecombinatie Deurne repareren we dagelijks tientallen smartphones en tablets, van een gebarsten scherm tot een lege batterij. Loop binnen op Wolfsberg 1 of maak van tevoren een afspraak.",
   Gemert:
     "Bij Telecombinatie Gemert helpt ons vakkundige team je snel weer verder, of het nu om een kapot scherm, een trage accu of een andere storing gaat. Kom langs op Nieuwstraat 40a.",
   Geldrop:
     "Bij Telecombinatie Geldrop kun je terecht voor reparatie van vrijwel elk smartphone- en tabletmerk, met oog voor kwaliteit en een eerlijke prijs. Je vindt ons aan de Langstraat 16.",
   Veghel:
-    "Voor reparatie van je smartphone of tablet ben je in Veghel bij Telecombinatie aan het juiste adres — we regelen het snel voor je via onze vestiging in de regio.",
+    "Voor reparatie van je smartphone of tablet ben je in Veghel bij Telecombinatie aan het juiste adres. We regelen het snel voor je via onze vestiging in de regio.",
   Asten:
-    "Voor reparatie van je smartphone of tablet ben je in Asten bij Telecombinatie aan het juiste adres — we regelen het snel voor je via onze vestiging in de regio.",
+    "Voor reparatie van je smartphone of tablet ben je in Asten bij Telecombinatie aan het juiste adres. We regelen het snel voor je via onze vestiging in de regio.",
 };
 
 function ClockIcon({ className }: { className?: string }) {
@@ -62,25 +60,25 @@ export function WaaromBlok({ variant }: { variant: SiteVariant }) {
   const usps = [
     {
       icon: ClockIcon,
-      titel: variant.directeReparaties ? "Vaak dezelfde dag klaar" : "Snel geregeld via ons netwerk",
+      titel: variant.directeReparaties ? "Snel geholpen" : "Snel geregeld",
       tekst: variant.directeReparaties
-        ? "Voor de meeste reparaties hoef je niet lang te wachten."
-        : "We zorgen dat je toestel snel bij de juiste vestiging terechtkomt.",
+        ? "Je toestel is vaak dezelfde dag al gerepareerd."
+        : "We brengen je toestel snel naar de juiste vestiging.",
     },
     {
       icon: ShieldCheckIcon,
-      titel: "Vakkundig gerepareerd",
-      tekst: "Onze monteurs repareren dagelijks tientallen toestellen en kennen vrijwel elk merk en model.",
+      titel: "Vakkundig team",
+      tekst: "Onze monteurs kennen vrijwel elk merk en model goed.",
     },
     {
       icon: SwapIcon,
-      titel: "Origineel of voordelig",
-      tekst: "Kies zelf: een origineel onderdeel of een voordeligere kwaliteitsvariant — jij bepaalt.",
+      titel: "Zelf kiezen",
+      tekst: "Kies voor een origineel onderdeel of een voordelig alternatief.",
     },
     {
       icon: MapPinIcon,
-      titel: "Dichtbij in de buurt",
-      tekst: `Met vestigingen in ${naarLijst(VESTIGINGEN.map(v => v.plaats))} ben je nooit ver van Telecombinatie vandaan.`,
+      titel: "Altijd dichtbij",
+      tekst: "Met meerdere vestigingen in de regio ben je nooit ver weg.",
     },
   ];
 
