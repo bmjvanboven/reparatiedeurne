@@ -30,8 +30,8 @@ const STAPPEN = [
       "We controleren de staat, werking en accu van je iPhone en doen op basis daarvan een eerlijk bod.",
   },
   {
-    titel: "Direct geld op je rekening",
-    tekst: "Ga je akkoord met het bod? Dan reken je direct af en zijn we klaar.",
+    titel: "Uitbetaling binnen 2 weken",
+    tekst: "Ga je akkoord met het bod? Dan maken we het bedrag binnen 2 weken over op je rekening.",
   },
 ];
 

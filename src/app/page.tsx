@@ -4,15 +4,23 @@ import { haalReparatieData, platteToestellenlijst } from "@/lib/toolbox";
 import { SearchBar } from "@/components/SearchBar";
 import { FeaturedDevices } from "@/components/FeaturedDevices";
 import { HomeBackground } from "@/components/HomeBackground";
-import { huidigeSiteVariant } from "@/lib/site-varianten";
+import { huidigeSiteVariant, naarLijst } from "@/lib/site-varianten";
+import { REPARATIE_VESTIGINGEN } from "@/lib/locations";
 
 export async function generateMetadata(): Promise<Metadata> {
   const variant = await huidigeSiteVariant();
+  const reparatieSteden = REPARATIE_VESTIGINGEN.map(v => v.plaats);
+
+  const description = variant.directeReparaties
+    ? `Reparatie van smartphones en tablets bij Telecombinatie in ${variant.stad} en omgeving. Zoek je toestel en bekijk direct de reparatieprijzen.`
+    : `Telecombinatie in ${variant.stad} — bekijk de reparatieprijzen van onze vestigingen in ${naarLijst(reparatieSteden)}.`;
+
   return {
-    description: `Reparatie van smartphones en tablets bij Telecombinatie in ${variant.stad} en omgeving. Zoek je toestel en bekijk direct de reparatieprijzen.`,
+    description,
     keywords: [
-      `reparatiewinkel ${variant.stad}`,
-      `telefoon reparatie ${variant.stad}`,
+      ...(variant.directeReparaties
+        ? [`reparatiewinkel ${variant.stad}`, `telefoon reparatie ${variant.stad}`]
+        : [`Telecombinatie ${variant.stad}`]),
       "smartphone reparatie Gemert",
       "iPhone reparatie Geldrop",
       "Samsung reparatie",

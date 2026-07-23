@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
 import { haalReparatieData } from "@/lib/toolbox";
 import { ReparatieprijzenApp } from "@/components/ReparatieprijzenApp";
-import { huidigeSiteVariant } from "@/lib/site-varianten";
+import { huidigeSiteVariant, naarLijst } from "@/lib/site-varianten";
+import { REPARATIE_VESTIGINGEN } from "@/lib/locations";
 
 export async function generateMetadata(): Promise<Metadata> {
   const variant = await huidigeSiteVariant();
+  const reparatieSteden = REPARATIE_VESTIGINGEN.map(v => v.plaats);
+
+  const description = variant.directeReparaties
+    ? `Bekijk direct de actuele reparatieprijzen voor Apple, Samsung en overige smartphones en tablets bij Telecombinatie in ${variant.stad} en omgeving.`
+    : `Bekijk direct de actuele reparatieprijzen van Telecombinatie in ${naarLijst(reparatieSteden)}.`;
+
   return {
     title: "Reparatieprijzen",
-    description: `Bekijk direct de actuele reparatieprijzen voor Apple, Samsung en overige smartphones en tablets bij Telecombinatie in ${variant.stad} en omgeving.`,
+    description,
     keywords: [
       "reparatieprijzen",
       "iPhone reparatie prijzen",

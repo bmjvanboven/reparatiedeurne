@@ -14,10 +14,14 @@ const montserrat = Montserrat({
 
 export async function generateMetadata(): Promise<Metadata> {
   const variant = await huidigeSiteVariant();
-  const stedenVolgorde = [
-    variant.stad,
-    ...REPARATIE_VESTIGINGEN.map(v => v.plaats).filter(p => p !== variant.stad),
-  ];
+  const reparatieSteden = REPARATIE_VESTIGINGEN.map(v => v.plaats);
+  const stedenVolgorde = variant.directeReparaties
+    ? [variant.stad, ...reparatieSteden.filter(p => p !== variant.stad)]
+    : reparatieSteden;
+
+  const description = variant.directeReparaties
+    ? `Telecombinatie repareert smartphones en tablets van Apple, Samsung en overige merken in ${variant.stad} en omgeving. Bekijk direct de reparatieprijzen.`
+    : `Telecombinatie in ${variant.stad} — voor reparaties van smartphones en tablets kun je terecht bij onze vestigingen in ${naarLijst(reparatieSteden)}. Bekijk direct de reparatieprijzen.`;
 
   return {
     metadataBase: new URL(`https://${variant.domein}`),
@@ -25,14 +29,14 @@ export async function generateMetadata(): Promise<Metadata> {
       default: `Reparatie ${naarLijst(stedenVolgorde)} | Telecombinatie`,
       template: "%s | Telecombinatie",
     },
-    description: `Telecombinatie repareert smartphones en tablets van Apple, Samsung en overige merken in ${variant.stad} en omgeving. Bekijk direct de reparatieprijzen.`,
+    description,
     keywords: [
       "telefoon reparatie",
       "smartphone reparatie",
       "tablet reparatie",
       "iPhone reparatie",
       "Samsung reparatie",
-      `reparatie ${variant.stad}`,
+      variant.directeReparaties ? `reparatie ${variant.stad}` : `Telecombinatie ${variant.stad}`,
       "reparatie Deurne",
       "reparatie Gemert",
       "reparatie Geldrop",

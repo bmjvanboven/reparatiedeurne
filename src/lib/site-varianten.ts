@@ -4,17 +4,22 @@ export type SiteVariant = {
   domein: string;
   siteNaam: string;
   stad: string;
+  /** Voert deze stad zelf reparaties uit? Zo niet, dan claimt de reparatie-tekst dat niet. */
+  directeReparaties: boolean;
 };
 
 const VARIANTEN: SiteVariant[] = [
-  { domein: "reparatiegemert.nl", siteNaam: "reparatiegemert", stad: "Gemert" },
-  { domein: "reparatiegeldrop.nl", siteNaam: "reparatiegeldrop", stad: "Geldrop" },
+  { domein: "reparatiegemert.nl", siteNaam: "reparatiegemert", stad: "Gemert", directeReparaties: true },
+  { domein: "reparatiegeldrop.nl", siteNaam: "reparatiegeldrop", stad: "Geldrop", directeReparaties: true },
+  { domein: "reparatieveghel.nl", siteNaam: "reparatieveghel", stad: "Veghel", directeReparaties: false },
+  { domein: "reparatieasten.nl", siteNaam: "reparatieasten", stad: "Asten", directeReparaties: false },
 ];
 
 const STANDAARD: SiteVariant = {
   domein: "reparatiedeurne.nl",
   siteNaam: "reparatiedeurne",
   stad: "Deurne",
+  directeReparaties: true,
 };
 
 export function bepaalSiteVariant(host: string | null): SiteVariant {
