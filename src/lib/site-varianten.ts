@@ -36,6 +36,12 @@ export async function huidigeSiteVariant(): Promise<SiteVariant> {
   return bepaalSiteVariant(h.get("host"));
 }
 
+/** Steden met een eigen iPhone-reparatie SEO-landingspagina (src/app/iphone-reparatie-<slug>). */
+export const IPHONE_LANDINGSPAGINAS: Record<string, string> = {
+  Deurne: "iphone-reparatie-deurne",
+  Geldrop: "iphone-reparatie-geldrop",
+};
+
 export function naarLijst(items: string[]): string {
   if (items.length <= 1) return items.join("");
   return `${items.slice(0, -1).join(", ")} & ${items[items.length - 1]}`;

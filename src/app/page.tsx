@@ -4,7 +4,13 @@ import { haalReparatieData, platteToestellenlijst } from "@/lib/toolbox";
 import { SearchBar } from "@/components/SearchBar";
 import { FeaturedDevices } from "@/components/FeaturedDevices";
 import { HomeBackground } from "@/components/HomeBackground";
-import { huidigeSiteVariant, naarLijst, reparatieStedenVolgorde, socialMetadata } from "@/lib/site-varianten";
+import {
+  huidigeSiteVariant,
+  naarLijst,
+  reparatieStedenVolgorde,
+  socialMetadata,
+  IPHONE_LANDINGSPAGINAS,
+} from "@/lib/site-varianten";
 import { REPARATIE_VESTIGINGEN } from "@/lib/locations";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -80,10 +86,13 @@ export default async function HomePage() {
           <p className="mt-3 text-sm text-neutral-400">
             Niet zeker welk toestel je hebt? Neem contact op, wij helpen je graag verder.
           </p>
-          {variant.stad === "Deurne" && (
+          {IPHONE_LANDINGSPAGINAS[variant.stad] && (
             <p className="mt-2 text-sm text-neutral-400">
-              <Link href="/iphone-reparatie-deurne" className="font-semibold text-tc-paars hover:underline">
-                Meer over iPhone reparatie in Deurne →
+              <Link
+                href={`/${IPHONE_LANDINGSPAGINAS[variant.stad]}`}
+                className="font-semibold text-tc-paars hover:underline"
+              >
+                Meer over iPhone reparatie in {variant.stad} →
               </Link>
             </p>
           )}
