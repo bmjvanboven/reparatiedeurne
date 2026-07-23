@@ -60,7 +60,7 @@ export function ReparatieprijzenApp({
         value={zoekterm}
         onChange={e => setZoekterm(e.target.value)}
         placeholder="Zoek je toestel, bijv. iPhone 13 of Galaxy S22…"
-        className="mb-6 block w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-[15px] outline-none focus:border-tc-paars"
+        className="mb-6 block w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-base outline-none focus:border-tc-paars"
       />
 
       {zoekresultaten ? (
@@ -98,13 +98,9 @@ export function ReparatieprijzenApp({
 
           {huidigMerk &&
             groepeerModellen(huidigMerk.modellen).map((groep, i) => (
-              <div key={`groep-${i}`}>
+              <div key={`groep-${i}`} className={i === 0 ? "" : "mt-10"}>
                 {groep.groep && (
-                  <p
-                    className={`mb-4 border-b-2 border-tc-paars-rand pb-1.5 text-xs font-bold uppercase tracking-wider text-tc-paars ${
-                      i === 0 ? "mt-0" : "mt-10"
-                    }`}
-                  >
+                  <p className="mb-4 border-b-2 border-tc-paars-rand pb-1.5 text-xs font-bold uppercase tracking-wider text-tc-paars">
                     {groep.groep}
                   </p>
                 )}

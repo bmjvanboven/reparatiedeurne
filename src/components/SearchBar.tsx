@@ -29,7 +29,7 @@ export function SearchBar({ toestellen }: { toestellen: ToestelZoekResultaat[] }
         onChange={e => setTerm(e.target.value)}
         disabled={navigatingNaar !== null}
         placeholder="Zoek je toestel, bijv. iPhone 13 of Galaxy S22…"
-        className="block w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-[15px] outline-none focus:border-tc-paars disabled:opacity-60"
+        className="block w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-base outline-none focus:border-tc-paars disabled:opacity-60"
       />
       {suggesties.length > 0 && (
         <ul className="absolute z-10 mt-1 w-full overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-[0_8px_24px_rgba(0,0,0,0.12)]">

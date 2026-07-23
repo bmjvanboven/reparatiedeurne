@@ -39,7 +39,7 @@ export function PriceDialog({
               type="button"
               onClick={onClose}
               aria-label="Sluiten"
-              className="text-2xl leading-none text-neutral-400 hover:text-tc-paars"
+              className="rounded-full text-2xl leading-none text-neutral-400 outline-none hover:text-tc-paars focus-visible:ring-2 focus-visible:ring-tc-paars/40"
             >
               &times;
             </button>
@@ -59,8 +59,8 @@ export function PriceDialog({
               {model.reparaties.map(r => (
                 <tr key={r.naam}>
                   <td className="border-b border-neutral-100 py-2">{r.naam}</td>
-                  <td className="border-b border-neutral-100 py-2 text-right font-bold">
-                    € {r.prijs.toFixed(2).replace(".", ",")}
+                  <td className="whitespace-nowrap border-b border-neutral-100 py-2 text-right font-bold">
+                    €&nbsp;{r.prijs.toFixed(2).replace(".", ",")}
                   </td>
                 </tr>
               ))}
