@@ -6,6 +6,8 @@ export type SiteVariant = {
   stad: string;
   /** Voert deze stad zelf reparaties uit? Zo niet, dan claimt de reparatie-tekst dat niet. */
   directeReparaties: boolean;
+  /** Code uit Google Search Console (per domein een eigen property/code). */
+  googleSiteVerificatie?: string;
 };
 
 const VARIANTEN: SiteVariant[] = [
@@ -20,6 +22,7 @@ const STANDAARD: SiteVariant = {
   siteNaam: "reparatiedeurne",
   stad: "Deurne",
   directeReparaties: true,
+  googleSiteVerificatie: "wKhBsIkWR49Mc_RrbFj5ukZ7H94_-PaLGUvku-SrNOM",
 };
 
 export function bepaalSiteVariant(host: string | null): SiteVariant {

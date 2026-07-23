@@ -47,6 +47,9 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: "/",
     },
+    ...(variant.googleSiteVerificatie
+      ? { verification: { google: variant.googleSiteVerificatie } }
+      : {}),
     ...socialMetadata(variant, titel, description),
   };
 }
