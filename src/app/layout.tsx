@@ -48,10 +48,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const variant = await huidigeSiteVariant();
-  const footerSteden = reparatieStedenVolgorde(
-    variant,
-    REPARATIE_VESTIGINGEN.map(v => v.plaats),
-  );
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -81,7 +77,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
         <Header siteNaam={variant.siteNaam} />
         <main className="flex-1">{children}</main>
-        <Footer reparatieSteden={footerSteden} />
+        <Footer stad={variant.stad} />
       </body>
     </html>
   );
