@@ -73,12 +73,15 @@ export type ModelGroep = {
 
 export function groepeerModellen(modellen: ReparatieModel[]): ModelGroep[] {
   const groepen: ModelGroep[] = [];
+  const perGroep = new Map<string | null, ModelGroep>();
   for (const model of modellen) {
-    const laatste = groepen[groepen.length - 1];
-    if (laatste && laatste.groep === model.groep) {
-      laatste.modellen.push(model);
+    const bestaande = perGroep.get(model.groep);
+    if (bestaande) {
+      bestaande.modellen.push(model);
     } else {
-      groepen.push({ groep: model.groep, modellen: [model] });
+      const nieuw: ModelGroep = { groep: model.groep, modellen: [model] };
+      groepen.push(nieuw);
+      perGroep.set(model.groep, nieuw);
     }
   }
   return groepen;
