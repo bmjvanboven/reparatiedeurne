@@ -3,6 +3,7 @@ import Link from "next/link";
 import { haalReparatieData, platteToestellenlijst } from "@/lib/toolbox";
 import { SearchBar } from "@/components/SearchBar";
 import { FeaturedDevices } from "@/components/FeaturedDevices";
+import { HomeBackground } from "@/components/HomeBackground";
 
 export const metadata: Metadata = {
   description:
@@ -40,42 +41,45 @@ export default async function HomePage() {
   const data = await haalReparatieData();
 
   return (
-    <div className="mx-auto max-w-6xl px-4">
-      <section className="py-14 sm:py-20 text-center">
-        <h1 className="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-neutral-900 sm:text-5xl">
-          Reparatie van je smartphone of tablet, snel en vakkundig
-        </h1>
-        <p className="mx-auto mt-4 max-w-xl text-neutral-500">
-          Telecombinatie repareert Apple, Samsung en overige toestellen in Deurne, Gemert, Veghel
-          en Geldrop.
-        </p>
-        <div className="mx-auto mt-8 flex justify-center">
-          {data ? (
-            <SearchBar toestellen={platteToestellenlijst(data)} />
-          ) : (
-            <p className="text-sm text-red-700">
-              Zoeken is momenteel niet beschikbaar. Probeer het later opnieuw.
-            </p>
-          )}
-        </div>
-        <p className="mt-3 text-sm text-neutral-400">
-          Niet zeker welk toestel je hebt? Neem contact op, wij helpen je graag verder.
-        </p>
-      </section>
+    <>
+      <HomeBackground />
+      <div className="mx-auto max-w-6xl px-4">
+        <section className="py-14 sm:py-20 text-center">
+          <h1 className="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-neutral-900 sm:text-5xl">
+            Reparatie van je smartphone of tablet, snel en vakkundig
+          </h1>
+          <p className="mx-auto mt-4 max-w-xl text-neutral-500">
+            Telecombinatie repareert Apple, Samsung en overige toestellen in Deurne, Gemert, Veghel
+            en Geldrop.
+          </p>
+          <div className="mx-auto mt-8 flex justify-center">
+            {data ? (
+              <SearchBar toestellen={platteToestellenlijst(data)} />
+            ) : (
+              <p className="text-sm text-red-700">
+                Zoeken is momenteel niet beschikbaar. Probeer het later opnieuw.
+              </p>
+            )}
+          </div>
+          <p className="mt-3 text-sm text-neutral-400">
+            Niet zeker welk toestel je hebt? Neem contact op, wij helpen je graag verder.
+          </p>
+        </section>
 
-      <section className="pb-16">
-        <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-xl font-bold text-neutral-900">Uitgelichte toestellen</h2>
-          <Link href="/reparatieprijzen" className="text-sm font-semibold text-tc-paars hover:underline">
-            Alle reparatieprijzen →
-          </Link>
-        </div>
-        {data ? (
-          <FeaturedDevices data={data} toestellen={UITGELICHT} />
-        ) : (
-          <p className="text-sm text-neutral-500">Toestellen konden niet worden geladen.</p>
-        )}
-      </section>
-    </div>
+        <section className="pb-16">
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-xl font-bold text-neutral-900">Uitgelichte toestellen</h2>
+            <Link href="/reparatieprijzen" className="text-sm font-semibold text-tc-paars hover:underline">
+              Alle reparatieprijzen →
+            </Link>
+          </div>
+          {data ? (
+            <FeaturedDevices data={data} toestellen={UITGELICHT} />
+          ) : (
+            <p className="text-sm text-neutral-500">Toestellen konden niet worden geladen.</p>
+          )}
+        </section>
+      </div>
+    </>
   );
 }
