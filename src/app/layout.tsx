@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { VESTIGINGEN } from "@/lib/locations";
+import { VESTIGINGEN, REPARATIE_VESTIGINGEN } from "@/lib/locations";
 import { huidigeSiteVariant, naarLijst } from "@/lib/site-varianten";
 import "./globals.css";
 
@@ -14,7 +14,10 @@ const montserrat = Montserrat({
 
 export async function generateMetadata(): Promise<Metadata> {
   const variant = await huidigeSiteVariant();
-  const stedenVolgorde = [variant.stad, ...VESTIGINGEN.map(v => v.plaats).filter(p => p !== variant.stad)];
+  const stedenVolgorde = [
+    variant.stad,
+    ...REPARATIE_VESTIGINGEN.map(v => v.plaats).filter(p => p !== variant.stad),
+  ];
 
   return {
     metadataBase: new URL(`https://${variant.domein}`),

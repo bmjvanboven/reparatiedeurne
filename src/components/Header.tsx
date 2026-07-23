@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { VESTIGINGEN } from "@/lib/locations";
+import { REPARATIE_VESTIGINGEN } from "@/lib/locations";
 
 const NAV_ITEMS = [
   { href: "/", label: "Home" },
@@ -19,11 +19,15 @@ export function Header({ siteNaam }: { siteNaam: string }) {
       <div className="bg-tc-paars text-white text-xs sm:text-sm">
         <div className="mx-auto max-w-6xl px-4 py-2 flex flex-wrap justify-center gap-x-1 text-center">
           <span>In</span>
-          {VESTIGINGEN.map((v, i) => (
+          {REPARATIE_VESTIGINGEN.map((v, i) => (
             <span key={v.plaats}>
               {" "}
               <span className="font-semibold">{v.plaats}</span>
-              {i < VESTIGINGEN.length - 1 ? (i === VESTIGINGEN.length - 2 ? " en" : ",") : ""}
+              {i < REPARATIE_VESTIGINGEN.length - 1
+                ? i === REPARATIE_VESTIGINGEN.length - 2
+                  ? " en"
+                  : ","
+                : ""}
             </span>
           ))}
         </div>

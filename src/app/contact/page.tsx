@@ -26,7 +26,7 @@ export default async function ContactPage() {
     <div className="mx-auto max-w-6xl px-4 py-10">
       <h1 className="mb-3 text-2xl font-bold text-neutral-900 sm:text-3xl">Contact</h1>
       <p className="mb-10 max-w-2xl text-neutral-600">
-        Vragen over een reparatie, een afspraak maken of gewoon even langskomen? Onze drie
+        Vragen over een reparatie, een afspraak maken of gewoon even langskomen? Onze vijf
         vestigingen helpen je graag verder.
       </p>
 
