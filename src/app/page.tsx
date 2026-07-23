@@ -4,6 +4,7 @@ import { haalReparatieData, platteToestellenlijst } from "@/lib/toolbox";
 import { SearchBar } from "@/components/SearchBar";
 import { FeaturedDevices } from "@/components/FeaturedDevices";
 import { HomeBackground } from "@/components/HomeBackground";
+import { WaaromBlok } from "@/components/WaaromBlok";
 import {
   huidigeSiteVariant,
   naarLijst,
@@ -111,6 +112,8 @@ export default async function HomePage() {
             <p className="text-sm text-neutral-500">Toestellen konden niet worden geladen.</p>
           )}
         </section>
+
+        <WaaromBlok variant={variant} />
       </div>
     </>
   );
