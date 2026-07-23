@@ -6,6 +6,7 @@ import { FeaturedDevices } from "@/components/FeaturedDevices";
 import { HomeBackground } from "@/components/HomeBackground";
 import { WaaromBlok } from "@/components/WaaromBlok";
 import { ReviewsBlok } from "@/components/ReviewsBlok";
+import { TrustCta } from "@/components/TrustCta";
 import {
   huidigeSiteVariant,
   naarLijst,
@@ -116,6 +117,7 @@ export default async function HomePage() {
 
         <WaaromBlok variant={variant} />
         <ReviewsBlok />
+        <TrustCta variant={variant} />
       </div>
     </>
   );
