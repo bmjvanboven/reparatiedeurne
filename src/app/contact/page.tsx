@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { sorteerVestigingenVoor } from "@/lib/locations";
-import { huidigeSiteVariant } from "@/lib/site-varianten";
+import { huidigeSiteVariant, socialMetadata } from "@/lib/site-varianten";
 
 export async function generateMetadata(): Promise<Metadata> {
   const variant = await huidigeSiteVariant();
+  const titel = `Contact – reparatiewinkel ${variant.stad}`;
+  const description = `Neem contact op met Telecombinatie in ${variant.stad} en omgeving, of loop gewoon binnen.`;
+
   return {
-    title: "Contact",
-    description: `Neem contact op met Telecombinatie in ${variant.stad} en omgeving, of loop gewoon binnen.`,
+    title: titel,
+    description,
     keywords: [
       "contact Telecombinatie",
       `reparatiewinkel ${variant.stad}`,
@@ -15,6 +18,10 @@ export async function generateMetadata(): Promise<Metadata> {
       "reparatiewinkel Geldrop",
       "openingstijden telefoonwinkel",
     ],
+    alternates: {
+      canonical: "/contact",
+    },
+    ...socialMetadata(variant, titel, description),
   };
 }
 
@@ -31,39 +38,52 @@ export default async function ContactPage() {
       </p>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {vestigingen.map(v => (
-          <div key={v.plaats} className="rounded-xl border border-neutral-200 p-5">
-            <h2 className="mb-2 text-lg font-bold text-tc-paars leading-tight">
-              Telecombinatie
-              <br />
-              {v.plaats}
-            </h2>
-            <p className="text-sm text-neutral-600">
-              {v.straat}
-              <br />
-              {v.postcode}
-            </p>
-            <p className="mt-3 text-sm text-neutral-600">
-              <a href={`tel:${v.telefoon.replace(/\s+/g, "")}`} className="hover:text-tc-paars">
-                {v.telefoon}
-              </a>
-              <br />
-              <a href={`mailto:${v.email}`} className="hover:text-tc-paars">
-                {v.email}
-              </a>
-            </p>
-            {v.mapsUrl && (
-              <a
-                href={v.mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-block text-sm font-semibold text-tc-paars hover:underline"
-              >
-                Route via Google Maps
-              </a>
-            )}
-          </div>
-        ))}
+        {vestigingen.map(v => {
+          const isHuidig = v.plaats === variant.stad;
+          return (
+            <div
+              key={v.plaats}
+              className={`rounded-xl border p-5 ${
+                isHuidig ? "border-tc-paars bg-white shadow-sm" : "border-neutral-200"
+              }`}
+            >
+              {isHuidig && (
+                <span className="mb-2 inline-block rounded-full bg-tc-paars px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+                  Jouw vestiging
+                </span>
+              )}
+              <h2 className="mb-2 text-lg font-bold text-tc-paars leading-tight">
+                Telecombinatie
+                <br />
+                {v.plaats}
+              </h2>
+              <p className="text-sm text-neutral-600">
+                {v.straat}
+                <br />
+                {v.postcode}
+              </p>
+              <p className="mt-3 text-sm text-neutral-600">
+                <a href={`tel:${v.telefoon.replace(/\s+/g, "")}`} className="hover:text-tc-paars">
+                  {v.telefoon}
+                </a>
+                <br />
+                <a href={`mailto:${v.email}`} className="hover:text-tc-paars">
+                  {v.email}
+                </a>
+              </p>
+              {v.mapsUrl && (
+                <a
+                  href={v.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-block text-sm font-semibold text-tc-paars hover:underline"
+                >
+                  Route via Google Maps
+                </a>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

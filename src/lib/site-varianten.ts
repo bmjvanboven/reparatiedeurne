@@ -42,3 +42,26 @@ export function naarLijst(items: string[]): string {
 export function reparatieStedenVolgorde(variant: SiteVariant, reparatieSteden: string[]): string[] {
   return [variant.stad, ...reparatieSteden.filter(p => p !== variant.stad)];
 }
+
+/** Eén gedeelde afbeelding voor Open Graph/Twitter-previews (public/og-image.png, 1200x1200). */
+const OG_AFBEELDING = { url: "/og-image.png", width: 1200, height: 1200, alt: "Telecombinatie" };
+
+/** Open Graph + Twitter-metadata voor een pagina, met dezelfde titel/omschrijving als de gewone metadata. */
+export function socialMetadata(variant: SiteVariant, titel: string, beschrijving: string) {
+  return {
+    openGraph: {
+      type: "website" as const,
+      locale: "nl_NL",
+      siteName: `Telecombinatie ${variant.stad}`,
+      title: titel,
+      description: beschrijving,
+      images: [OG_AFBEELDING],
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title: titel,
+      description: beschrijving,
+      images: [OG_AFBEELDING.url],
+    },
+  };
+}

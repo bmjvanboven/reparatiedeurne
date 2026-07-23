@@ -3,7 +3,7 @@ import { Montserrat } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { VESTIGINGEN, REPARATIE_VESTIGINGEN } from "@/lib/locations";
-import { huidigeSiteVariant, naarLijst, reparatieStedenVolgorde } from "@/lib/site-varianten";
+import { huidigeSiteVariant, naarLijst, reparatieStedenVolgorde, socialMetadata } from "@/lib/site-varianten";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -20,11 +20,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = variant.directeReparaties
     ? `Telecombinatie repareert smartphones en tablets van Apple, Samsung en overige merken in ${variant.stad} en omgeving. Bekijk direct de reparatieprijzen.`
     : `Telecombinatie in ${variant.stad} — voor reparaties van smartphones en tablets kun je terecht bij onze vestigingen in ${naarLijst(reparatieSteden)}. Bekijk direct de reparatieprijzen.`;
+  const titel = `Reparatie ${naarLijst(stedenVolgorde)} | Telecombinatie`;
 
   return {
     metadataBase: new URL(`https://${variant.domein}`),
     title: {
-      default: `Reparatie ${naarLijst(stedenVolgorde)} | Telecombinatie`,
+      default: titel,
       template: "%s | Telecombinatie",
     },
     description,
@@ -43,6 +44,10 @@ export async function generateMetadata(): Promise<Metadata> {
     icons: {
       icon: "/reparatie-favicon.png",
     },
+    alternates: {
+      canonical: "/",
+    },
+    ...socialMetadata(variant, titel, description),
   };
 }
 

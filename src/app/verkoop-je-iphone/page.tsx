@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { sorteerVestigingenVoor } from "@/lib/locations";
-import { huidigeSiteVariant } from "@/lib/site-varianten";
+import { huidigeSiteVariant, socialMetadata } from "@/lib/site-varianten";
 
 export async function generateMetadata(): Promise<Metadata> {
   const variant = await huidigeSiteVariant();
+  const titel = `Verkoop je iPhone in ${variant.stad}`;
+  const description = `Verkoop je oude iPhone bij Telecombinatie in ${variant.stad} en omgeving. Kom langs voor een eerlijke inschatting.`;
+
   return {
-    title: "Verkoop je iPhone",
-    description: `Verkoop je oude iPhone bij Telecombinatie in ${variant.stad} en omgeving. Kom langs voor een eerlijke inschatting.`,
+    title: titel,
+    description,
     keywords: [
       "iPhone verkopen",
       "iPhone inruilen",
@@ -15,6 +18,10 @@ export async function generateMetadata(): Promise<Metadata> {
       `telefoon verkopen ${variant.stad}`,
       "telefoon inkoop",
     ],
+    alternates: {
+      canonical: "/verkoop-je-iphone",
+    },
+    ...socialMetadata(variant, titel, description),
   };
 }
 
@@ -80,22 +87,35 @@ export default async function VerkoopJeIphonePage() {
       <div className="mt-12">
         <h2 className="mb-4 font-bold text-neutral-900">Kom langs of bel even</h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {vestigingen.map(v => (
-            <div key={v.plaats} className="rounded-xl border border-neutral-200 p-5">
-              <h3 className="mb-2 font-bold text-tc-paars leading-tight">
-                Telecombinatie
-                <br />
-                {v.plaats}
-              </h3>
-              <p className="text-sm text-neutral-600">{v.straat}</p>
-              <a
-                href={`tel:${v.telefoon.replace(/\s+/g, "")}`}
-                className="mt-2 inline-block text-sm font-semibold text-tc-paars hover:underline"
+          {vestigingen.map(v => {
+            const isHuidig = v.plaats === variant.stad;
+            return (
+              <div
+                key={v.plaats}
+                className={`rounded-xl border p-5 ${
+                  isHuidig ? "border-tc-paars bg-white shadow-sm" : "border-neutral-200"
+                }`}
               >
-                {v.telefoon}
-              </a>
-            </div>
-          ))}
+                {isHuidig && (
+                  <span className="mb-2 inline-block rounded-full bg-tc-paars px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+                    Jouw vestiging
+                  </span>
+                )}
+                <h3 className="mb-2 font-bold text-tc-paars leading-tight">
+                  Telecombinatie
+                  <br />
+                  {v.plaats}
+                </h3>
+                <p className="text-sm text-neutral-600">{v.straat}</p>
+                <a
+                  href={`tel:${v.telefoon.replace(/\s+/g, "")}`}
+                  className="mt-2 inline-block text-sm font-semibold text-tc-paars hover:underline"
+                >
+                  {v.telefoon}
+                </a>
+              </div>
+            );
+          })}
         </div>
         <p className="mt-6 text-sm text-neutral-500">
           Liever eerst je vraag stellen?{" "}

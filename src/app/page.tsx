@@ -4,16 +4,18 @@ import { haalReparatieData, platteToestellenlijst } from "@/lib/toolbox";
 import { SearchBar } from "@/components/SearchBar";
 import { FeaturedDevices } from "@/components/FeaturedDevices";
 import { HomeBackground } from "@/components/HomeBackground";
-import { huidigeSiteVariant, naarLijst } from "@/lib/site-varianten";
+import { huidigeSiteVariant, naarLijst, reparatieStedenVolgorde, socialMetadata } from "@/lib/site-varianten";
 import { REPARATIE_VESTIGINGEN } from "@/lib/locations";
 
 export async function generateMetadata(): Promise<Metadata> {
   const variant = await huidigeSiteVariant();
   const reparatieSteden = REPARATIE_VESTIGINGEN.map(v => v.plaats);
+  const stedenVolgorde = reparatieStedenVolgorde(variant, reparatieSteden);
 
   const description = variant.directeReparaties
     ? `Reparatie van smartphones en tablets bij Telecombinatie in ${variant.stad} en omgeving. Zoek je toestel en bekijk direct de reparatieprijzen.`
     : `Telecombinatie in ${variant.stad} — bekijk de reparatieprijzen van onze vestigingen in ${naarLijst(reparatieSteden)}.`;
+  const titel = `Reparatie ${naarLijst(stedenVolgorde)} | Telecombinatie`;
 
   return {
     description,
@@ -27,6 +29,10 @@ export async function generateMetadata(): Promise<Metadata> {
       "scherm reparatie",
       "accu vervangen",
     ],
+    alternates: {
+      canonical: "/",
+    },
+    ...socialMetadata(variant, titel, description),
   };
 }
 
@@ -59,8 +65,8 @@ export default async function HomePage() {
             Reparatie van je smartphone of tablet, snel en vakkundig
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-neutral-500">
-            Telecombinatie repareert Apple, Samsung en overige toestellen in Deurne, Gemert en
-            Geldrop.
+            Telecombinatie repareert Apple, Samsung en overige toestellen bij een vestiging in de
+            buurt.
           </p>
           <div className="mx-auto mt-8 flex justify-center">
             {data ? (
