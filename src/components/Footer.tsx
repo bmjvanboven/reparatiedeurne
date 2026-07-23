@@ -4,7 +4,7 @@ export function Footer() {
   return (
     <footer className="mt-16 border-t border-neutral-200 bg-neutral-50">
       <div className="mx-auto max-w-6xl px-4 py-12">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {VESTIGINGEN.map(v => (
             <div key={v.plaats}>
               <h3 className="font-bold text-tc-paars mb-2 leading-tight">
@@ -40,7 +40,7 @@ export function Footer() {
           ))}
         </div>
         <p className="mt-10 text-xs text-neutral-400">
-          {`© ${new Date().getFullYear()} — Reparatie Deurne, Gemert, Veghel & Geldrop`}
+          {`© ${new Date().getFullYear()} — Reparatie Deurne, Gemert & Geldrop`}
         </p>
       </div>
     </footer>

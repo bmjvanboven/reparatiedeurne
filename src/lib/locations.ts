@@ -28,15 +28,6 @@ export const VESTIGINGEN: Vestiging[] = [
     mapsUrl: "https://g.page/telecombinatiegemert?share",
   },
   {
-    plaats: "Veghel",
-    naam: "Telecombinatie Veghel",
-    straat: "Kalverstraat 12",
-    postcode: "5461 JL Veghel",
-    telefoon: "0413 321 111",
-    email: "info@telecombinatieveghel.nl",
-    mapsUrl: "https://maps.app.goo.gl/HX5isguQkHaXVvpV8",
-  },
-  {
     plaats: "Geldrop",
     naam: "Telecombinatie Geldrop",
     straat: "Langstraat 16",

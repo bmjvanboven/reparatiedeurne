@@ -32,7 +32,6 @@ export async function generateMetadata(): Promise<Metadata> {
       `reparatie ${variant.stad}`,
       "reparatie Deurne",
       "reparatie Gemert",
-      "reparatie Veghel",
       "reparatie Geldrop",
       "Telecombinatie",
     ],

@@ -79,7 +79,7 @@ export default async function VerkoopJeIphonePage() {
 
       <div className="mt-12">
         <h2 className="mb-4 font-bold text-neutral-900">Kom langs of bel even</h2>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {vestigingen.map(v => (
             <div key={v.plaats} className="rounded-xl border border-neutral-200 p-5">
               <h3 className="mb-2 font-bold text-tc-paars leading-tight">

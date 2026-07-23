@@ -14,7 +14,6 @@ export async function generateMetadata(): Promise<Metadata> {
       `reparatiewinkel ${variant.stad}`,
       `telefoon reparatie ${variant.stad}`,
       "smartphone reparatie Gemert",
-      "tablet reparatie Veghel",
       "iPhone reparatie Geldrop",
       "Samsung reparatie",
       "scherm reparatie",
@@ -52,8 +51,8 @@ export default async function HomePage() {
             Reparatie van je smartphone of tablet, snel en vakkundig
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-neutral-500">
-            Telecombinatie repareert Apple, Samsung en overige toestellen in Deurne, Gemert, Veghel
-            en Geldrop.
+            Telecombinatie repareert Apple, Samsung en overige toestellen in Deurne, Gemert en
+            Geldrop.
           </p>
           <div className="mx-auto mt-8 flex justify-center">
             {data ? (
