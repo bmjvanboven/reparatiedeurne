@@ -9,14 +9,22 @@ const NAV_ITEMS = [
   { href: "/contact", label: "Contact" },
 ];
 
-export function Header({ siteNaam }: { siteNaam: string }) {
+export function Header({
+  siteNaam,
+  directeReparaties,
+}: {
+  siteNaam: string;
+  directeReparaties: boolean;
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 bg-white">
       <div className="bg-tc-paars text-white text-xs sm:text-sm">
         <div className="mx-auto max-w-6xl px-4 py-2 flex justify-center text-center">
-          <span className="font-semibold">Vaak dezelfde dag gerepareerd</span>
+          <span className="font-semibold">
+            {directeReparaties ? "Vaak dezelfde dag gerepareerd" : "Wij regelen je reparatie"}
+          </span>
         </div>
       </div>
       <div className="border-b border-neutral-200">

@@ -75,7 +75,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        <Header siteNaam={variant.siteNaam} />
+        <Header siteNaam={variant.siteNaam} directeReparaties={variant.directeReparaties} />
         <main className="flex-1">{children}</main>
         <Footer stad={variant.stad} />
       </body>
