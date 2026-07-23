@@ -54,7 +54,7 @@ const UITGELICHT = [
 ];
 
 export default async function HomePage() {
-  const data = await haalReparatieData();
+  const [data, variant] = await Promise.all([haalReparatieData(), huidigeSiteVariant()]);
 
   return (
     <>
@@ -80,6 +80,13 @@ export default async function HomePage() {
           <p className="mt-3 text-sm text-neutral-400">
             Niet zeker welk toestel je hebt? Neem contact op, wij helpen je graag verder.
           </p>
+          {variant.stad === "Deurne" && (
+            <p className="mt-2 text-sm text-neutral-400">
+              <Link href="/iphone-reparatie-deurne" className="font-semibold text-tc-paars hover:underline">
+                Meer over iPhone reparatie in Deurne →
+              </Link>
+            </p>
+          )}
         </section>
 
         <section className="pb-16">
