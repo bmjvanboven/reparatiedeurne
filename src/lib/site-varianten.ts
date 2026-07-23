@@ -46,6 +46,7 @@ export async function huidigeSiteVariant(): Promise<SiteVariant> {
 export const IPHONE_LANDINGSPAGINAS: Record<string, string> = {
   Deurne: "iphone-reparatie-deurne",
   Geldrop: "iphone-reparatie-geldrop",
+  Gemert: "iphone-reparatie-gemert",
 };
 
 export function naarLijst(items: string[]): string {
