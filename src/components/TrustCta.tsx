@@ -3,7 +3,7 @@ import type { SiteVariant } from "@/lib/site-varianten";
 
 /** Gemiddelde Google-beoordeling per stad (alleen bekend voor de directe-reparatie-vestigingen). */
 const GOOGLE_RATING: Record<string, number> = {
-  Deurne: 4.7,
+  Deurne: 4.8,
   Gemert: 4.8,
   Geldrop: 4.8,
 };
@@ -20,7 +20,7 @@ export function TrustCta({ variant }: { variant: SiteVariant }) {
   const rating = GOOGLE_RATING[variant.stad];
 
   return (
-    <section className="pb-16 text-center">
+    <section className="text-center">
       {rating && (
         <p className="mb-5 inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-neutral-900 shadow-sm">
           <StarIcon className="h-4 w-4 text-tc-oranje" />
