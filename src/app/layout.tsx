@@ -3,7 +3,7 @@ import { Montserrat } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { VESTIGINGEN, REPARATIE_VESTIGINGEN } from "@/lib/locations";
-import { huidigeSiteVariant, naarLijst } from "@/lib/site-varianten";
+import { huidigeSiteVariant, naarLijst, reparatieStedenVolgorde } from "@/lib/site-varianten";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -15,9 +15,7 @@ const montserrat = Montserrat({
 export async function generateMetadata(): Promise<Metadata> {
   const variant = await huidigeSiteVariant();
   const reparatieSteden = REPARATIE_VESTIGINGEN.map(v => v.plaats);
-  const stedenVolgorde = variant.directeReparaties
-    ? [variant.stad, ...reparatieSteden.filter(p => p !== variant.stad)]
-    : reparatieSteden;
+  const stedenVolgorde = reparatieStedenVolgorde(variant, reparatieSteden);
 
   const description = variant.directeReparaties
     ? `Telecombinatie repareert smartphones en tablets van Apple, Samsung en overige merken in ${variant.stad} en omgeving. Bekijk direct de reparatieprijzen.`
@@ -50,6 +48,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const variant = await huidigeSiteVariant();
+  const footerSteden = reparatieStedenVolgorde(
+    variant,
+    REPARATIE_VESTIGINGEN.map(v => v.plaats),
+  );
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -79,7 +81,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
         <Header siteNaam={variant.siteNaam} />
         <main className="flex-1">{children}</main>
-        <Footer />
+        <Footer reparatieSteden={footerSteden} />
       </body>
     </html>
   );

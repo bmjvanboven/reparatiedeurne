@@ -1,6 +1,7 @@
 import { VESTIGINGEN } from "@/lib/locations";
+import { naarLijst } from "@/lib/site-varianten";
 
-export function Footer() {
+export function Footer({ reparatieSteden }: { reparatieSteden: string[] }) {
   return (
     <footer className="mt-16 border-t border-neutral-200 bg-neutral-50">
       <div className="mx-auto max-w-6xl px-4 py-12">
@@ -40,7 +41,7 @@ export function Footer() {
           ))}
         </div>
         <p className="mt-10 text-xs text-neutral-400">
-          {`© ${new Date().getFullYear()} — Reparatie Deurne, Gemert & Geldrop`}
+          {`© ${new Date().getFullYear()} — Reparatie ${naarLijst(reparatieSteden)}`}
         </p>
       </div>
     </footer>
